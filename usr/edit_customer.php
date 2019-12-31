@@ -41,7 +41,7 @@
 			if (!preg_match("/^1\d{10}$/", $phone)) aerror(3);
 		}
 		db_update("customer", "birthday='$birthday', sex=$sex, Email='$email', phone='$phone'", "name='$usrname'");
-		header("Location:http://localhost/usr/personal_info.php?usrname=".$usrname);
+		header("Location:personal_info.php?usrname=".$usrname);
 		exit;
 	}
 

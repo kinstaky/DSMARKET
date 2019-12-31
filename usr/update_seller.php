@@ -9,9 +9,9 @@
 		exit;
 	}
 	$name = $_POST["act"];
-	require "/var/www/html/database/connect_db.php";
+	require "../database/connect_db.php";
 	db_update("customer", "status=2", "name='$name'");
 	db_close();
-	header("Location:http://localhost/usr/check_seller.php");
+	header("Location:check_seller.php");
 	exit;
 ?>

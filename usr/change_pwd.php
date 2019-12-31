@@ -21,7 +21,7 @@
 	}
 	db_update("customer", "password='$npwd'", "name='$usrname'");
 	db_close();
-		header("Location:http://localhost/usr/personal_info.php?usrname=$usrname");
+		header("Location:personal_info.php?usrname=$usrname");
 	header($jurl);
 
 
@@ -29,7 +29,7 @@
 		GLOBAL $usrname;
 		$_SESSION["change_pwd_error"] = $val;
 		db_close();
-		header("Location:http://localhost/usr/personal_info.php?usrname=$usrname");
+		header("Location:personal_info.php?usrname=$usrname");
 		exit;
 	}
 ?>

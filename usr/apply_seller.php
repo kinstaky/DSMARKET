@@ -11,5 +11,5 @@
 	$usrname = $_POST["usrname"];
 	db_update("customer", "status=1", "name='$usrname'");
 	db_close();
-	header("Location:http://localhost/usr/personal_info.php?usrname=$usrname");
+	header("Location:personal_info.php?usrname=$usrname");
 ?>

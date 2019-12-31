@@ -3,6 +3,6 @@
 	unset($_SESSION["usrname"]);
 	unset($_SESSION["uid"]);
 	unset($_SESSION["status"]);
-	header("Location:http://localhost");
+	header("Location:../index.php");
 	exit;
 ?>

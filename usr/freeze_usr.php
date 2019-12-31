@@ -10,9 +10,9 @@
 	}
 	$name = $_POST["act"];
 	$grade = $_POST["grade"];
-	require "/var/www/html/database/connect_db.php";
+	require "../database/connect_db.php";
 	db_update("customer", "status=$grade", "name='$name'");
 	db_close();
-	header("Location:http://localhost/usr/usr_management.php");
+	header("Location:usr_management.php");
 	exit;
 ?>
