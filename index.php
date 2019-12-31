@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <?php
 	session_start();
-	$_SESSION["usrname"];
-	$_SESSION["status"];
-	$_SESSION["uid"];
 	include "database/connect_db.php";
 ?>
 <html>

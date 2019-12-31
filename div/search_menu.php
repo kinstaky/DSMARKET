@@ -1,4 +1,6 @@
 <?php
+	if (isset($_GET["keyword"])) $keyword = $_GET["keyword"];
+	else $keyword ="";
 	echo <<<EOF
 		<div id='blank' style='margin:auto;width:800px;height:50px'> </div>
 		<div id='search_part' style='margin:auto;width:800px;height:230px'>
@@ -6,10 +8,13 @@
 				<div style='margin:auto;width:100%;text-align:center;font-size:80px'> DS<br></div>
 				<div style='margin:auto;text-align:center;width:100%;font-size:30px'>MARKET<br> </div>
 			</div>
+			<div id='search_part' style='width:600px;float:right;height:170px'>
 			<form id='search' style='width:600px;float:right;height:170px;line-height:150px' action='../index.php' method='GET'>
-				<input type='text' name='keyword' style='width:400px;'>
+				<input type='text' name='keyword' style='width:400px' value='$keyword'>
 				<input type='submit' value='search' style='font-size:20px'>
-			</form>
+			</form><br>
+			<a href='../goods/show_XML.php?keyword=$keyword' target='_blank' style='position:relative;top:-40px;width:500px;float:left;margin:auto;text-align:center'>Show XML</a>
+			</div>
 		</div>
 	EOF;
 ?>
