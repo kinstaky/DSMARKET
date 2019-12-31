@@ -71,7 +71,7 @@
 		unset($_SESSION["cus_phone"]);
 		db_insert("customer(name, password, birthday, sex, Email, phone, status)", "('$name', '$pwd', '$birthday', $sex, '$email', '$phone', 0)");
 		mysqli_close($conn);
-		header("Location:http://localhost");
+		header("Location:../index.php");
 		exit;
 	}
 
