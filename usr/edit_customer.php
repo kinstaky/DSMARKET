@@ -4,27 +4,9 @@
 	if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"]=="POST") {
 		$usrname = $_POST["usrname"];
 		$birthday="";
-		if (!isset($_POST["birthday_y"]) || empty($_POST["birthday_y"])) aerror(1);
+		if (!isset($_POST["birthday"]) || empty($_POST["birthday"])) aerror(1);
 		else {
-			$year = test_input($_POST["birthday_y"]);
-			if (!isset($_POST["birthday_m"]) || empty($_POST["birthday_m"])) aerror(1);
-			else {
-				$month = test_input($_POST["birthday_m"]);
-				if (!isset($_POST["birthday_d"]) || empty($_POST["birthday_d"])) aerror(1);
-				else {
-					$day = test_input($_POST["birthday_d"]);
-
-					if ($year < 1950 || $year > 2035) aerror(1);
-					else if ($month < 1 || $month > 12) aerror(1);
-					else if ($day < 1 || $day > 31) aerror(1);
-					else {
-						$birthday = $year."-".$month."-".$day;
-						$_SESSION["cus_year"] = $year;
-						$_SESSION["cus_month"] = $month;
-						$_SESSION["cus_day"] = $day;
-					}
-				}
-			}
+			$birthday = $_POST["birthday"];
 		}
 
 		$sex = $_POST["sex"] == "MALE" ? 0 : 1;

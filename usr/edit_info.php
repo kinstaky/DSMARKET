@@ -17,13 +17,7 @@
 		$row = $retval->fetch_assoc();
 	}
 	else echo "sql not find $usrname";
-	$bir_s = $row["birthday"];
-	$pos = strpos($bir_s, '-');
-	$year = substr($bir_s, 0, $pos);
-	$day = substr($bir_s, $pos+1, strlen($bir_s));
-	$pos = strpos($day, '-');
-	$month = substr($day, 0, $pos);
-	$day = substr($day, $pos+1, strlen($day));
+	$birthday = $row["birthday"];
 ?>
 <html>
 <head>
@@ -42,17 +36,12 @@
 	<form action="edit_customer.php" method="post">
 		<input type='hidden' name='usrname' required='required' value=<?php echo "'$usrname'";?> >
 		Birthday<br>
-		<input type="text" name="birthday_y" style="margin:2px" size="5" <?php echo "value='$year'";?> required='required'>
-		year
-		<input type="text" name="birthday_m" style="margin:2px" size="3" <?php echo "value='$month'";?> required='required'>
-		month
-		<input type="text" name="birthday_d" style="margin:2px" size="3" <?php echo "value='$day'";?> required='required'>
-		day<br>
+		<input type="date" name="birthday" <?php echo "value='$birthday'";?> required='required'>
 		Sex<br>
 		<input type="radio" name="sex" value="MALE" <?php if (!$row["sex"]) echo "checked='checked'";?> >Male
 		<input type="radio" name="sex" value="FEMALE" <?php if ($row["sex"]) echo "checked='checked'";?> >Female<br>
 		Email<br>
-		<input type="text" name="Email" <?php echo "value='".$row["Email"]."'";?> required='required'><br>
+		<input type="email" name="Email" <?php echo "value='".$row["Email"]."'";?> required='required'><br>
 		Phone<br>
 		<input type="text" name="phone" <?php echo "value='".$row["phone"]."'";?> required='required'><br><br>
 		<input type="submit" value="save"><br>

@@ -102,7 +102,7 @@
 // <!ELEMENT Content(#PCDATA)> ]>
 // EOF;
 	$doc_root = $_SERVER["DOCUMENT_ROOT"];
-	$file = fopen("$doc_root/goods/show.xml","w");
+	$file = fopen("show.xml","w");
 	//echo $xml;
 	fwrite($file, $xml);
 	fclose($file);

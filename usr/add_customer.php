@@ -2,7 +2,6 @@
 	session_start();
 	include "../database/connect_db.php";
 	if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"]=="POST") {
-		echo "??";
 		if (!isset($_POST["user"]) || empty($_POST["user"])) aerror(1);
 		else {
 			$name = test_input($_POST["user"]);
@@ -19,27 +18,10 @@
 		}
 
 		$birthday="";
-		if (!isset($_POST["birthday_y"]) || empty($_POST["birthday_y"])) aerror(6);
+		if (!isset($_POST["birthday"]) || empty($_POST["birthday"])) aerror(6);
 		else {
-			$year = test_input($_POST["birthday_y"]);
-			if (!isset($_POST["birthday_m"]) || empty($_POST["birthday_m"])) aerror(6);
-			else {
-				$month = test_input($_POST["birthday_m"]);
-				if (!isset($_POST["birthday_d"]) || empty($_POST["birthday_d"])) aerror(6);
-				else {
-					$day = test_input($_POST["birthday_d"]);
-
-					if ($year < 1950 || $year > 2035) aerror(7);
-					else if ($month < 1 || $month > 12) aerror(7);
-					else if ($day < 1 || $day > 31) aerror(7);
-					else {
-						$birthday = $year."-".$month."-".$day;
-						$_SESSION["cus_year"] = $year;
-						$_SESSION["cus_month"] = $month;
-						$_SESSION["cus_day"] = $day;
-					}
-				}
-			}
+			$birthday = $_POST["birthday"];
+			$_SESSION["cus_birthday"] = $birthday;
 		}
 
 		if (!isset($_POST["sex"])) aerror(8);
@@ -63,10 +45,8 @@
 		}
 		goerror();
 		unset($_SESSION["cus_name"]);
-		unset($_SESSION["cus_year"]);
-		unset($_SESSION["cus_month"]);
-		unset($_SESSION["cus_day"]);
 		unset($_SESSION["cus_sex"]);
+		unset($_SESSION["cus_birthday"]);
 		unset($_SESSION["cus_email"]);
 		unset($_SESSION["cus_phone"]);
 		db_insert("customer(name, password, birthday, sex, Email, phone, status)", "('$name', '$pwd', '$birthday', $sex, '$email', '$phone', 0)");

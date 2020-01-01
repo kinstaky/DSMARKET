@@ -29,30 +29,13 @@
 		Password Repeat<br/>
 		<input type="password" name="rpwd" required='required'><br/>
 		Birthday<br>
-		<input type="text" name="birthday_y" style="margin:2px" size="5" <?php
-																	if (isset($_SESSION["cus_year"])) {
-																		$year = $_SESSION["cus_year"];
-																		echo "value='$year'";
-																		unset($_SESSION["cus_year"]);
+		<input type="date" name='birthday' required="required" <?php
+																	if (isset($_SESSION["cus_birthday"])) {
+																		$birthday=$_SESSION["cus_birthday"];
+																		echo "value='$birthday'";
+																		unset($_SESSION["cus_birthday"]);
 																	}
-																?> required='required'>
-		year
-		<input type="text" name="birthday_m" style="margin:2px" size="3"<?php
-																	if (isset($_SESSION["cus_month"])) {
-																		$month = $_SESSION["cus_month"];
-																		echo "value='$month'";
-																		unset($_SESSION["cus_month"]);
-																	}
-																?> required='required'>
-		month
-		<input type="text" name="birthday_d" style="margin:2px" size="3" <?php
-																	if (isset($_SESSION["cus_day"])) {
-																		$day = $_SESSION["cus_day"];
-																		echo "value='$day'";
-																		unset($_SESSION["cus_day"]);
-																	}
-																?> required='required'>
-		day<br>
+																?>><br>
 		Sex<br>
 		<input type="radio" name="sex" value="MALE" <?php
 														if (isset($_SESSION["cus_sex"]) && $_SESSION["cus_sex"]=="MALE")
@@ -65,7 +48,7 @@
 															unset($_SESSION["cus_sex"]);
 													?> >Female<br>
 		Email<br>
-		<input type="text" name="Email" <?php
+		<input type="email" name="Email" <?php
 											if (isset($_SESSION["cus_email"])) {
 												$mail = $_SESSION["cus_email"];
 												echo "value='$mail'";

@@ -13,7 +13,7 @@
 				<input type='text' name='keyword' style='width:400px' value='$keyword'>
 				<input type='submit' value='search' style='font-size:20px'>
 			</form><br>
-			<a href='../goods/show_XML.php?keyword=$keyword' target='_blank' style='position:relative;top:-40px;width:500px;float:left;margin:auto;text-align:center'>Show XML</a>
+			<a href='../files/show_xml.php?keyword=$keyword' target='_blank' style='position:relative;top:-40px;width:500px;float:left;margin:auto;text-align:center'>Show XML</a>
 			</div>
 		</div>
 	EOF;
