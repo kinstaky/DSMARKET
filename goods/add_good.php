@@ -23,7 +23,7 @@
 
 		if (!isset($_POST["desc"]) || empty($_POST["desc"])) aerror(1);
 		else {
-			$desc = test_input($_POST["desc"]);
+			$desc = $_POST["desc"];
 			$_SESSION["good_desc"] = $desc;
 		}
 		goerror();
@@ -33,6 +33,37 @@
 		unset($_SESSION["good_desc"]);
 		$uid = $_SESSION["uid"];
 		db_insert("goods(name, type, price, description, status, sid, time)", "('$name', '$type', '$price', '$desc', 0, $uid, NOW())");
+
+
+		#image info, edit from https://www.runoob.com/php/php-file-upload.html
+		$retval = db_select2("max(gid) AS mid", "goods");
+		if ($retval->num_rows > 0) {
+			$row = $retval->fetch_assoc();
+			$mid = $row["mid"];
+		}
+		// 允许上传的图片后缀
+		$allowedExts = array("gif", "jpeg", "jpg", "png");
+		$temp = explode(".", $_FILES["file"]["name"]);
+		$extension = end($temp);     // 获取文件后缀名
+		$fname = $mid.".".$extension;
+		if (!(($_FILES["file"]["type"] == "image/gif")
+		|| ($_FILES["file"]["type"] == "image/jpeg")
+		|| ($_FILES["file"]["type"] == "image/jpg")
+		|| ($_FILES["file"]["type"] == "image/pjpeg")
+		|| ($_FILES["file"]["type"] == "image/x-png")
+		|| ($_FILES["file"]["type"] == "image/png"))
+		|| !in_array($extension, $allowedExts)) aerror(4);
+		if ($_FILES["file"]["size"] > 204800) aerror(5);// 小于 200 kb
+
+	   	if ($_FILES["file"]["error"] > 0) {
+	        echo "错误：: " . $_FILES["file"]["error"] . "<br>";
+	        aerror(6);
+	    }
+	    $addr = "../files/img/".$fname;
+	    if (file_exists($addr)) unlink($addr);
+        move_uploaded_file($_FILES["file"]["tmp_name"], $addr);
+
+        db_insert("goodimage(gid, name)", "('$mid', '$fname')");
 		db_close();
 		header("Location:sell_management.php");
 		exit;

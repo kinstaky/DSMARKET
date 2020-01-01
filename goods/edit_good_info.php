@@ -21,6 +21,11 @@
 	$gtype = $row["type"];
 	$gprice = $row["price"];
 	$gdesc = $row["description"];
+	$retval = db_select("name", "goodimage", "gid=$gid");
+	if ($retval->num_rows > 0) {
+		$row = $retval->fetch_assoc();
+	}
+	$fname = $row["name"];
 ?>
 <html>
 <head>
@@ -28,6 +33,22 @@
 	<title>Edit good information</title>
 	<style> a {text-decoration:none} </style>
 	<!-- <author>kinstaky</author> -->
+
+	<!-- script below copy from https://blog.csdn.net/jackfrued/article/details/8967667 -->
+    <script type="text/javascript">
+
+        function showPreview(source) {
+            var file = source.files[0];
+            if(window.FileReader) {
+                var fr = new FileReader();
+                fr.onloadend = function(e) {
+                    document.getElementById("portrait").src = e.target.result;
+                };
+                fr.readAsDataURL(file);
+            }
+        }
+    </script>
+
 </head>
 <body>
 <?php include "../div/top_menu.php";?>
@@ -36,11 +57,14 @@
 <div id="container" style="width:800px;margin:auto">
 	<h3> edit good information </h3>
 	<br>
-	<div id='edit_img' style='width:400px;height:400px;float:left;outline-width:1px;outline-style:solid;outline-color:#99ff66'>
-		<span style='margin:auto;text-align:center'>wait for update</span>
+	<div id='edit_img' style='width:400px;height:500px;float:left;outline-width:1px'>
+		<div id='img' style='margin-bottom:20px;width:400px;height:400px;float:left;outline-width:1px;outline-style:solid;outline-color:#99ff66'>
+			<img id="portrait" src=<?php echo "'../files/img/$fname'";?> width='400' height="400" alt='select img'>
+		</div>
+		<input form='edit_good' type='file' name='file' id='file' onchange="showPreview(this)" accept='image/jpeg, image/gif, image/jpg, image/pjpeg, image/x-png, image/png'>
 	</div>
 	<div id='edit_text' style='width:400px;position:relative;left:50px;float:left'>
-		<form action="edit_good.php" method="post">
+		<form id='edit_good' action="edit_good.php" method="post" enctype="multipart/form-data">
 			<input type='hidden' name='gid' required='required' value=<?php echo "'$gid'"; ?>>
 			Name<br>
 			<input type="text" name="gname" <?php echo "value='$gname'";?> required='required'><br><br>
@@ -67,6 +91,15 @@
 						break;
 					case 4:
 						echo "Invalid description";
+						break;
+					case 6:
+						echo "Invalid file type";
+						break;
+					case 7:
+						echo "File too big";
+						break;
+					case 8:
+						echo "Upload file error";
 						break;
 					default:
 						echo "Undefined error";

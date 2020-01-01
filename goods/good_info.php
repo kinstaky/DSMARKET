@@ -24,7 +24,7 @@
 	$retval = db_select("sid, name, type, description, price, status", "goods", "gid=$gid");
 	if ($retval->num_rows > 0) {
 		$row = $retval->fetch_assoc();
-		if ($row["sid"] == $_SESSION["uid"]) $isowner = 1;
+		if ($row["sid"] == $_SESSION["uid"] && $_SESSION["status"] == 2) $isowner = 1;
 		$gname = $row["name"];
 		$gtype = $row["type"];
 		$gdesc = $row["description"];
@@ -41,11 +41,18 @@
 		echo "Error page.";
 		exit;
 	}
+	$iret = db_select("name", "goodimage", "gid=$gid");
+	if ($iret->num_rows > 0) {
+		$irow = $iret->fetch_assoc();
+		$fname = $irow["name"];
+	}
 	include "../div/search_menu.php";
 	echo <<<EOF
 		<div id='content' style='margin:auto;width:800px'>
 			<div id='basic_info' style='marign:auto;width:800px;height:400px'>
-			<div id='wait_for_update' style="width:400px;height:400px;float:left;outline-width:1px;outline-style:solid;outline-color:#99ff66">wait for update</div>
+			<div id='goodimg' style="width:400px;height:400px;float:left;outline-width:1px;outline-style:solid;outline-color:#99ff66">
+			<img src='../files/img/$fname' width='400' height='400' alt='image not found'>
+			</div>
 			<div id='good_info' style='width:400px;height:400px;float:left;position:relative;left:50px'>
 				Name
 				<span style='position:absolute;left:100px'>$gname</span><br><br>
@@ -66,7 +73,7 @@
 			</form>
 		EOF;
 	}
-	else {
+	else if ($_SESSION["status"] == 2) {
 		echo <<<EOF
 			<form action='add_in_cart.php' method='post'>
 				<input type='hidden' name='gid' value='$gid'>

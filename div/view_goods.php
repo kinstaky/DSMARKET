@@ -11,14 +11,14 @@
 			$gid = $row["gid"];
 			$price = $row["price"];
 			$goodname = $row["name"];
-			//$imgretval = db_select("src", "good_imgs", "gid=$gid");
+			$imgretval = db_select("name", "goodimage", "gid=$gid");
 			echo "<a id='good_$n' href='../goods/good_info.php?gid=$gid' target='_top' style='height:270px;width:180px;margin:10px;float:left;text-decoration:none;outline-width:1px;outline-style:solid;outline-color:#99ff66;border-width:20px;border-color:#ffffff;border-style:solid'>\n";
-			// if ($imgretval->num_rows > 0) {
-			// 	$imgrow = $imgsrc->fetch_assoc();
-			// 	$imgsrc = $imgrow["src"];
-			// 	echo "<img src='../img/imgsrc' alt='without image' width='180' height='180'>\n";
-			// }
-			echo "<div id='good_".$n."_wait_update' style='height:180px;width:180px;color:#000000'>wait for update</div>\n";
+			if ($imgretval->num_rows > 0) {
+				$imgrow = $imgretval->fetch_assoc();
+				$imgsrc = $imgrow["name"];
+				echo "<img src='../files/img/$imgsrc' alt='image not found' width='180' height='180'>\n";
+			}
+			//echo "<div id='good_".$n."_wait_update' style='height:180px;width:180px;color:#000000'>wait for update</div>\n";
 			echo "<div id='good_".$n."_price' style='font-size:30px;color:#ff0000'><b>$price</b></div>\n";
 			echo "<div id='good_".$n."_name' style='color:#000000'>$goodname</div>\n";
 			echo "</a>\n";
