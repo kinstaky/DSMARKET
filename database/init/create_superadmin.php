@@ -14,6 +14,6 @@
 	}
 	echo "Create table success\n";
 
-	$retval = db_insert("superadmin(name, password) ", "('superadmin', MD5('asdqwe'))");
+	$retval = db_insert("superadmin(sid, name, password) ", "('1', 'superadmin', MD5('asdqwe'))");
 	mysqli_close($conn);
 ?>
