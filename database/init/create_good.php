@@ -1,5 +1,6 @@
 <?php
-	# status -5-freeze-by-admin-and-seller -4-freeze-by-admin-only -2-return -1-freeze-by-seller-only 0-normal 1-sold
+	# status -5-freeze-by-admin-and-seller -4-freeze-by-admin-only -1-freeze-by-seller-only
+	# 0-normal 1-sold 2-return-by-buyer 4-return-disgree-by-seller 8-returned 16-return-deny
 	require '../connect_db.php';
 	echo "connect database success\n";
 

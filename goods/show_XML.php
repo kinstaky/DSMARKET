@@ -2,7 +2,7 @@
 	require "../database/connect_db.php";
 	if (isset($_GET["keyword"])) $keyword = $_GET["keyword"];
 	if (empty($keyword)) $retval = db_select("goods.name AS gname, gid, description, type, price, customer.name AS sname", "goods, customer", "goods.status=0 AND goods.sid=customer.uid AND (TIMESTAMPDIFF(YEAR, goods.time, NOW()) < 5)");
-	else $retval = db_select("goods.name AS gname, gid, description, type, price, customer.name AS sname", "goods, customer", "goods.status=0 AND type LIKE '%$keyword%' AND customer.uid=goods.sid AND (TIMESTAMPDIFF(YEAR, goods.time, NOW()) < 5)");
+	else $retval = db_select("goods.name AS gname, gid, description, type, price, customer.name AS sname", "goods, customer", "goods.status=0 AND (type LIKE '%$keyword%' OR goods.name LIKE '%$keyword%') AND customer.uid=goods.sid AND (TIMESTAMPDIFF(YEAR, goods.time, NOW()) < 5)");
 	$xml = "";
 	$xml = sprintf("%s<?xml version='1.0' encoding='UTF-8'?>\n", $xml);
 

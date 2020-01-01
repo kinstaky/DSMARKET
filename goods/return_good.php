@@ -5,8 +5,10 @@
 		exit;
 	}
 	$gid = $_POST["gid"];
-	db_update("goods", "status=-2", "gid=$gid");
+	$status = $_POST["status"];
+	$url = $_POST["url"];
+	db_update("goods", "status=$status", "gid=$gid");
 	db_close();
-	header("Location:buy_management.php");
+	header("Location:$url");
 	exit;
 ?>

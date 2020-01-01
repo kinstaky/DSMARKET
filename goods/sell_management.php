@@ -38,12 +38,12 @@
 					echo "<a href='../usr/personal_info.php?usrname='$uname' style='position:relative;top:10px'>$uname</a>\n";
 					echo "<span style='position:relative;top:10px;left:5px'> $btime</span>";
 				}
-				else {
+				else if ($row["status"] < 1) {
 					echo "<span style='width:120px;float:left;margin:10px'>".$row["price"]."</span>\n";
 					echo "<form action='edit_good_info.php' method = 'get' style='margin:10px;float:left;width:90px'>\n";
 					echo "	<input type='hidden' name='gid' value='".$row["gid"]."'>\n";
 					echo "	<input type='submit' value='edit'";
-					if ($row["status"] == 1) echo " disabled";
+					if ($row["status"] > 0) echo " disabled";
 					echo ">\n";
 					echo "</form>\n";
 					echo "<form action='freeze_good.php' method = 'POST' style='margin:10px;float:left;width:100px'>\n";
@@ -63,7 +63,27 @@
 					echo "	<input type='hidden' name='gid' value='".$row["gid"]."'>\n";
 					echo "  <input type='hidden' name='url' value='sell_management.php'>\n";
 					echo "	<input type='submit' value='delete'";
-					if ($row["status"] == 1) echo " disabled";
+					if ($row["status"] > 0) echo " disabled";
+					echo ">\n";
+					echo "</form>\n";
+				}
+				else {
+					echo "<span style='width:120px;float:left;margin:10px'>".$row["price"]."</span>\n";
+					echo "<form action='return_good.php' method = 'POST' style='position:absolute;left:370px'>\n";
+					echo "	<input type='hidden' name='gid' value='".$row["gid"]."'>\n";
+					echo "  <input type='hidden' name='status' value='8'>\n";
+					echo "  <input type='hidden' name='url' value='sell_management.php'>\n";
+					echo "	<input type='submit' style='position:relative;top:7px' value='agree'";
+					if ($row["status"] != 2) echo " disabled";
+					echo ">\n";
+					echo "</form>\n";
+					echo "<span style='width:120px;float:left;margin:10px'>".$row["price"]."</span>\n";
+					echo "<form action='return_good.php' method = 'POST' style='position:absolute;left:480px'>\n";
+					echo "	<input type='hidden' name='gid' value='".$row["gid"]."'>\n";
+					echo "  <input type='hidden' name='status' value='6'>\n";
+					echo "  <input type='hidden' name='url' value='sell_management.php'>\n";
+					echo "	<input type='submit' style='position:relative;top:7px' value='deny'";
+					if ($row["status"] != 2) echo " disabled";
 					echo ">\n";
 					echo "</form>\n";
 				}

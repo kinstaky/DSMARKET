@@ -36,18 +36,18 @@
 ?>
 <div id="blank" style="height:100px">
 </div>
-<div id='content' style='margin:auto;width:800px'>
+<div id='content' style='margin:auto;width:800px;position:relative;left:0px'>
 	<h2> personal information </h2>
 	<br>
 	<span style='margin:10px 65px 10px 0px;'><b>Username</b></span> <?php echo $row["name"]; ?><br><br>
 	<?php
 		GLOBAL $isadmin;
 		if ((!$isadmin && $_SESSION["status"]!=2) || ($_SESSION["status"]==2 && $_SESSION["usrname"]==$row["name"])) {
-			echo "<span style='margin:10px 75px 10px 0px'><b>Birthday </b></span>".$row["birthday"]."<br><br>\n";
+			echo "<b>Birthday</b><span style='position:absolute;left:160px'>".$row["birthday"]."</span><br><br>\n";
 			$sexstring = $row["sex"]? "FEMALE" : "MALE";
-			echo "<span style='margin:10px 124px 10px 0px'><b>Sex     </b></span>".$sexstring."<br><br>\n";
-			echo "<span style='margin:10px 105px 10px 0px'><b>Email   </b></span>".$row["Email"]."<br><br>\n";
-			echo "<span style='margin:10px 100px 10px 0px'><b>phone   </b></span>".$row["phone"]."<br><br>\n";
+			echo "<b>Sex</b><span style='position:absolute;left:160px'>".$sexstring."</span><br><br>\n";
+			echo "<b>Email</b><span style='position:absolute;left:160px'>".$row["Email"]."</span><br><br>\n";
+			echo "<b>Phone</b><span style='position:absolute;left:160px'>".$row["phone"]."</span><br><br>\n";
 		}
 		if ($usrname == $_SESSION["usrname"] && $_SESSION["status"] != 0) {
 			if ($_SESSION["status"] == 2) {
@@ -73,12 +73,12 @@
 			echo <<<EOF
 				<form method='post' action='change_pwd.php'>
 					<input type='hidden' name='usrname' value='$usrname'>
-					<span style='margin:10px 80px 30px 0px'><b>Old password</b></span>
-					<input type='password' name='opwd'><br><br>
-					<span style='margin:10px 72px 30px 0px'><b>New password</b></span>
-					<input type='password' name='npwd'><br><br>
-					<span style='margin:10px 10px 30px 0px'><b>New password repeat</b></span>
-					<input type='password' name='nrpwd'><br><br>
+					<b>Old password</b>
+					<input type='password' name='opwd' required='required' style='position:absolute;left:210px'><br><br>
+					<b>New password</b>
+					<input type='password' name='npwd' required='required' style='position:absolute;left:210px'><br><br>
+					<b>New password repeat</b>
+					<input type='password' name='nrpwd' required='required' style='position:absolute;left:210px'><br><br>
 					<input type='submit' value='Change password' style='font-size:20px'>
 				</form>
 			EOF;
@@ -100,7 +100,7 @@
 				unset($_SESSION["change_pwd_error"]);
 			}
 		}
-		if ($_SESSION["name"] != $usrname) {
+		if ($_SESSION["usrname"] != $usrname) {
 			$retval = db_select("gid, goods.name AS gname, price, goods.status AS gsta, type", "goods, customer", "sid=uid && customer.name='$usrname'");
 			if ($retval->num_rows > 0) {
 				echo <<<EOF

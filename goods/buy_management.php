@@ -41,13 +41,21 @@
 				if ($gsta == 1) {
 					echo "<form action='return_good.php' method = 'POST' style='position:relative;top:-41px'>\n";
 					echo "	<input type='hidden' name='gid' value='$gid'>\n";
+					echo "  <input type='hidden' name='status' value=2'>\n";
+					echo "  <input type='hidden' name='url' value='buy_management.php'>\n";
 					echo "	<input type='submit' style='position:absolute;left:600px' value='return'>\n";
 					echo "</form><br><br>\n";
 				}
-				else if ($gsta == -2) {
+				else if ($gsta == 2 || $gsta == 6) {
+					echo "<div style='position:relative;top:-41px'> <span style='position:absolute;left:600px;color:#ff0000'>returning</span></div><br><br>\n";
+				}
+				else if ($gsta == 8) {
 					echo "<div style='position:relative;top:-41px'> <span style='position:absolute;left:600px;color:#ff0000'>returned</span></div><br><br>\n";
 				}
-				else echo "<span style='position:absolute;left:600px;color:#ff0000'>Undefined status</span><br><br>\n";
+				else if ($gsta == 16) {
+					echo "<div style='position:relative;top:-41px'> <span style='position:absolute;left:600px;color:#ff0000'>deny returned</span></div><br><br>\n";
+				}
+				else echo "<div style='position:relative;top:-41px'> <span style='position:absolute;left:600px;color:#ff0000'>Undefined status $gsta</span></div><br><br>\n";
 			}
 		}
 	}

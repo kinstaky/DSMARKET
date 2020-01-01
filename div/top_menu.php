@@ -18,9 +18,13 @@
 			}
 			#admin
 			else if ($_SESSION["status"] < 2) {
+				$rr = db_select("*", "goods", "status=6");
+				$rrn = $rr->num_rows;
+				echo "<a href='../goods/return_management.php' target='_top' style='margin:8px;text-decoration:none'>return";
+				if ($rrn > 0) echo "($rrn)";
+				echo "</a>\n";
 				echo "<a href='../goods/buy_management.php' target='_top' style='margin:8px;text-decoration:none'>buy</a>\n";
 				echo "<a href='../goods/good_management.php' target='_top' style='margin:8px;text-decoration:none'>goods</a>\n";
-				if ($_SESSION["status"] == 0) echo "<a href='../usr/admin_management.php' target='_top' style='margin:8px;text-decoration:none'>admin</a>\n";
 				$retval = db_select("name", "customer", "status=1");
 				$nrow = $retval->num_rows;
 				echo "<a href='../usr/usr_management.php' target='_top' style='margin:8px;text-decoration:none'>users</a>\n";
@@ -33,7 +37,12 @@
 				$usrname = $_SESSION["usrname"];
 				$uid = $_SESSION["uid"];
 				$retval = db_select("name", "customer", "name='$usrname' && status=2");
-				if ($retval->num_rows > 0) echo "<a href='../goods/sell_management.php' target='_top' style='margin:10px;text-decoration:none'>sell()</a>\n";
+				if ($retval->num_rows > 0) {
+					echo "<a href='../goods/sell_management.php' target='_top' style='margin:10px;text-decoration:none'>sell";
+					$sr = db_select("*", "goods", "sid=$uid AND status=2");
+					if (($srn = $sr->num_rows) > 0) echo "($srn)";
+					echo "</a>\n";
+				}
 				$retval = db_select("*", "carts, goods", "carts.uid=$uid AND goods.gid=carts.gid AND goods.status=0");
 				$cartn = $retval->num_rows;
 				echo "<a href='../goods/cart_management.php' target='_top' style='margin:10px;text-decoration:none'>cart($cartn)</a>\n";

@@ -1,7 +1,7 @@
 <?php
 	if (isset($_GET["keyword"])) {
 		$keyword = $_GET["keyword"];
-		$retval = db_select("name, price, gid", "goods", "status=0 AND type LIKE '%$keyword%' AND (TIMESTAMPDIFF(YEAR, goods.time, NOW()) < 5)");
+		$retval = db_select("name, price, gid", "goods", "status=0 AND (type LIKE '%$keyword%' OR name LIKE '%$keyword%') AND (TIMESTAMPDIFF(YEAR, goods.time, NOW()) < 5)");
 	}
 	else $retval = db_select("name, price, gid", "goods", "status=0 AND (TIMESTAMPDIFF(YEAR, goods.time, NOW()) < 5)");
 	if ($retval->num_rows > 0) {
