@@ -21,7 +21,7 @@
 	$uid = $_SESSION["uid"];
 	$isowner = 0;
 	GLOBAL $row;
-	$retval = db_select("sid, name, type, description, price, status", "goods", "gid=$gid");
+	$retval = db_select("sid, name, type, description, price, status, imgsrc", "goods", "gid=$gid");
 	if ($retval->num_rows > 0) {
 		$row = $retval->fetch_assoc();
 		if ($row["sid"] == $_SESSION["uid"] && $_SESSION["status"] == 2) $isowner = 1;
@@ -31,6 +31,7 @@
 		$gprice = $row["price"];
 		$gsta = $row["status"];
 		$sid = $row["sid"];
+		$fname = $row["imgsrc"];
 	}
 	$retval = db_select("name", "customer", "uid=$sid");
 	if ($retval->num_rows > 0) {
@@ -40,11 +41,6 @@
 	else {
 		echo "Error page.";
 		exit;
-	}
-	$iret = db_select("name", "goodimage", "gid=$gid");
-	if ($iret->num_rows > 0) {
-		$irow = $iret->fetch_assoc();
-		$fname = $irow["name"];
 	}
 	include "../div/search_menu.php";
 	echo <<<EOF

@@ -8,12 +8,13 @@
 	if (($len = count($pay)) == 0) header("Location:cart_management.php");
 	for ($i = 0; $i < count($pay); ++$i) {
 		$cid = $pay[$i];
-		$retval = db_select("gid, uid", "carts", "cid=$cid");
+		$retval = db_select("goods.gid, uid, price", "carts, goods", "cid=$cid AND goods.gid=carts.gid");
 		if ($retval->num_rows > 0) {
 			$row = $retval->fetch_assoc();
 			$uid = $row["uid"];
 			$gid = $row["gid"];
-			db_insert("buy(uid, gid, time)", "($uid, $gid, NOW())");
+			$price = $row["price"];
+			db_insert("buy(uid, gid, time, price)", "($uid, $gid, NOW(), $price)");
 		}
 	}
 	db_close();

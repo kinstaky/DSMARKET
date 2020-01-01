@@ -15,8 +15,6 @@
 		$gdesc = test_input($_POST["gdesc"]);
 		if (empty($gdesc)) aerror(4);
 
-		db_update("goods", "name='$gname', type='$gtype', price='$gprice', description='$gdesc'", "gid=$gid");
-
 		#image info, edit from https://www.runoob.com/php/php-file-upload.html
 		if (!empty($_FILES["file"]["name"])) {
 			// 允许上传的图片后缀
@@ -40,8 +38,9 @@
 		    $addr = "../files/img/".$fname;
 		    if (file_exists($addr)) unlink($addr);
 	        move_uploaded_file($_FILES["file"]["tmp_name"], $addr);
-	        db_update("goodimage", "name='$fname'", "gid='$gid'");
+	        db_update("goods", "name='$gname', type='$gtype', price='$gprice', description='$gdesc', imgsrc='$fname'", "gid=$gid");
 	    }
+	    else db_update("goods", "name='$gname', type='$gtype', price='$gprice', description='$gdesc'", "gid=$gid");
 
 		header("Location:good_info.php?gid=$gid");
 		exit;

@@ -32,7 +32,6 @@
 		unset($_SESSION["good_price"]);
 		unset($_SESSION["good_desc"]);
 		$uid = $_SESSION["uid"];
-		db_insert("goods(name, type, price, description, status, sid, time)", "('$name', '$type', '$price', '$desc', 0, $uid, NOW())");
 
 
 		#image info, edit from https://www.runoob.com/php/php-file-upload.html
@@ -63,7 +62,7 @@
 	    if (file_exists($addr)) unlink($addr);
         move_uploaded_file($_FILES["file"]["tmp_name"], $addr);
 
-        db_insert("goodimage(gid, name)", "('$mid', '$fname')");
+        db_insert("goods(name, type, price, description, status, sid, time, imgsrc)", "('$name', '$type', '$price', '$desc', 0, $uid, NOW()), '$fname'");
 		db_close();
 		header("Location:sell_management.php");
 		exit;

@@ -11,7 +11,7 @@
 		exit;
 	}
 	$gid = $_GET["gid"];
-	$retval = db_select("name, type, price, description", "goods", "gid=$gid");
+	$retval = db_select("name, type, price, description, imgsrc", "goods", "gid=$gid");
 	GLOBAL $row;
 	if ($retval->num_rows > 0) {
 		$row = $retval->fetch_assoc();
@@ -21,11 +21,7 @@
 	$gtype = $row["type"];
 	$gprice = $row["price"];
 	$gdesc = $row["description"];
-	$retval = db_select("name", "goodimage", "gid=$gid");
-	if ($retval->num_rows > 0) {
-		$row = $retval->fetch_assoc();
-	}
-	$fname = $row["name"];
+	$fname = $row["imgsrc"];
 ?>
 <html>
 <head>
