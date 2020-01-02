@@ -23,7 +23,7 @@
 
 		if (!isset($_POST["desc"]) || empty($_POST["desc"])) aerror(1);
 		else {
-			$desc = $_POST["desc"];
+			$desc = test_input($_POST["desc"]);
 			$_SESSION["good_desc"] = $desc;
 		}
 		goerror();
@@ -38,7 +38,7 @@
 		$retval = db_select2("max(gid) AS mid", "goods");
 		if ($retval->num_rows > 0) {
 			$row = $retval->fetch_assoc();
-			$mid = $row["mid"];
+			$mid = (int)($row["mid"])+1;
 		}
 		// 允许上传的图片后缀
 		$allowedExts = array("gif", "jpeg", "jpg", "png");
@@ -62,7 +62,7 @@
 	    if (file_exists($addr)) unlink($addr);
         move_uploaded_file($_FILES["file"]["tmp_name"], $addr);
 
-        db_insert("goods(name, type, price, description, status, sid, time, imgsrc)", "('$name', '$type', '$price', '$desc', 0, $uid, NOW()), '$fname'");
+        db_insert("goods(name, type, price, description, status, sid, time, imgsrc)", "('$name', '$type', '$price', '$desc', 0, $uid, NOW(), '$fname')");
 		db_close();
 		header("Location:sell_management.php");
 		exit;

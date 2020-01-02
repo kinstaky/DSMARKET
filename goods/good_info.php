@@ -18,13 +18,13 @@
 		echo"Error: no gid\n";
 		exit;
 	}
-	$uid = $_SESSION["uid"];
+	if (isset($_SESSION["uid"])) $uid = $_SESSION["uid"];
 	$isowner = 0;
 	GLOBAL $row;
 	$retval = db_select("sid, name, type, description, price, status, imgsrc", "goods", "gid=$gid");
 	if ($retval->num_rows > 0) {
 		$row = $retval->fetch_assoc();
-		if ($row["sid"] == $_SESSION["uid"] && $_SESSION["status"] == 2) $isowner = 1;
+		if (isset($_SESSION["uid"]) && $row["sid"] == $_SESSION["uid"] && $_SESSION["status"] == 2) $isowner = 1;
 		$gname = $row["name"];
 		$gtype = $row["type"];
 		$gdesc = $row["description"];
@@ -69,7 +69,7 @@
 			</form>
 		EOF;
 	}
-	else if ($_SESSION["status"] == 2) {
+	else if (isset($_SESSION["status"]) && $_SESSION["status"] == 2) {
 		echo <<<EOF
 			<form action='add_in_cart.php' method='post'>
 				<input type='hidden' name='gid' value='$gid'>

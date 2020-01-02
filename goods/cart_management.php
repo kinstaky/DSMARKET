@@ -17,7 +17,7 @@
 		var pp = document.getElementsByName('payprice[]');
 		for (var i = 0; i < items.length; ++i) {
 			if (items[i].checked) {
-				sum += Number(pp[i].value);
+				sum += (int)(pp[i].value);
 			}
 		}
 		document.getElementById('total').innerHTML = sum;
