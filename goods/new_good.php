@@ -67,7 +67,7 @@
 		<textarea name="desc" rows=10 cols=50 style='font-size:20px' required='required'><?php
 																		if (isset($_SESSION["good_desc"])) {
 																			$desc = $_SESSION["good_desc"];
-																			echo "value='$desc'";
+																			echo "$desc";
 																			unset($_SESSION["good_desc"]);
 																		}?></textarea><br><br>
 
@@ -88,7 +88,7 @@
 					echo "Invalid file type";
 					break;
 				case 5:
-					echo "File too big";
+					echo "File too big, under 200kb";
 					break;
 				case 6:
 					echo "Upload file error";

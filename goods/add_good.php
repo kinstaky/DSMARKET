@@ -26,12 +26,7 @@
 			$desc = test_input($_POST["desc"]);
 			$_SESSION["good_desc"] = $desc;
 		}
-		goerror();
-		unset($_SESSION["good_name"]);
-		unset($_SESSION["good_type"]);
-		unset($_SESSION["good_price"]);
-		unset($_SESSION["good_desc"]);
-		$uid = $_SESSION["uid"];
+		
 
 
 		#image info, edit from https://www.runoob.com/php/php-file-upload.html
@@ -61,6 +56,14 @@
 	    $addr = "../files/img/".$fname;
 	    if (file_exists($addr)) unlink($addr);
         move_uploaded_file($_FILES["file"]["tmp_name"], $addr);
+
+
+		goerror();
+		unset($_SESSION["good_name"]);
+		unset($_SESSION["good_type"]);
+		unset($_SESSION["good_price"]);
+		unset($_SESSION["good_desc"]);
+		$uid = $_SESSION["uid"];
 
         db_insert("goods(name, type, price, description, status, sid, time, imgsrc)", "('$name', '$type', '$price', '$desc', 0, $uid, NOW(), '$fname')");
 		db_close();

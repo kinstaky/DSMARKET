@@ -22,7 +22,7 @@
 			<br>
 		EOF;
 		$uid = $_SESSION["uid"];
-		$retval = db_select("goods.name AS gname, goods.gid, bid, buy.time, goods.status", "goods, buy", "goods.gid=buy.gid && buy.uid=$uid");
+		$retval = db_select("goods.name AS gname, goods.gid, bid, buy.time, goods.status", "goods, buy", "goods.gid=buy.gid && buy.uid=$uid ORDER BY buy.time DESC");
 		if ($retval->num_rows > 0) {
 			echo "<span style='position:absolute;left:0px'>Name</span>\n";
 			echo "<span style='position:absolute;left:250px'>Time</span>\n";
@@ -41,7 +41,7 @@
 				if ($gsta == 1) {
 					echo "<form action='return_good.php' method = 'POST' style='position:relative;top:-41px'>\n";
 					echo "	<input type='hidden' name='gid' value='$gid'>\n";
-					echo "  <input type='hidden' name='status' value=2'>\n";
+					echo "  <input type='hidden' name='status' value='2'>\n";
 					echo "  <input type='hidden' name='url' value='buy_management.php'>\n";
 					echo "	<input type='submit' style='position:absolute;left:600px' value='return'>\n";
 					echo "</form><br><br>\n";

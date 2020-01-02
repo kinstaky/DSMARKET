@@ -92,7 +92,7 @@
 						echo "Invalid file type";
 						break;
 					case 7:
-						echo "File too big";
+						echo "File too big, under 200kb";
 						break;
 					case 8:
 						echo "Upload file error";

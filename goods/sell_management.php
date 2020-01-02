@@ -77,7 +77,6 @@
 					if ($row["status"] != 2) echo " disabled";
 					echo ">\n";
 					echo "</form>\n";
-					echo "<span style='width:120px;float:left;margin:10px'>".$row["price"]."</span>\n";
 					echo "<form action='return_good.php' method = 'POST' style='position:absolute;left:480px'>\n";
 					echo "	<input type='hidden' name='gid' value='".$row["gid"]."'>\n";
 					echo "  <input type='hidden' name='status' value='6'>\n";

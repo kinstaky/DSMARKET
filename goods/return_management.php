@@ -70,7 +70,7 @@
 				echo "<input type='submit' value='deny' style='position:absolute;left:800px'";
 				if ($row["gstatus"] != 6) echo "disabled";
 				echo ">\n";
-				echo "</form>\n";
+				echo "</form><br><br>\n";
 			}
 		}
 	}
