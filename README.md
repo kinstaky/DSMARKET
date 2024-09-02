@@ -1,7 +1,5 @@
 # 小恐龙二手市场
 
-蒲伟良 1600011338
-
 ## E-R关系图
 
 ![ER](D:\Code\DSMARKET\img\ER.png)
