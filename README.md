@@ -83,77 +83,77 @@
 
 ## 文档结构
 
-\|  data.txt                              数据库数据，使用mysqldump自动生成
-\│  index.php                             主页
-\│  README.md                             说明文档，本文件
-\│
-├─database                                数据库相关文件夹
-\│  \│  connect_db.php                    连接数据库，封装了select，update，delete等函数
-\│  \│
-\│  └─init                                初始化数据库，create所有表，还有两个trigger
-\│          create_admin.php              create `admin` 关系表
-\│          create_buy.php                create `buy` 关系表
-\│          create_cart.php               create `cart` 关系表
-\│          create_comment.php            create `comment` 关系表
-\│          create_customer.php           create `customer` 关系表
-\│          create_good.php               create `good` 关系表
-\|          create_good_image.php         create `good_image`关系表
-\│          create_superadmin.php         create `superadmin` 关系表
-\│          freeze_trigger.php            create `freeze_trigger`触发器，
-\|                                          当用户被冻结、解冻时其发布的商品相应变化
-\│          pay_trigger.php               create `pay_trigger`触发器，购买商品后，从购买者购物车中
-\|                                          删除该商品，设置商品的状态为已出售
-\│																 
-├─div                                     浏览器显示的版块
-\│      search_menu.php                   搜索框和logo，显示XML文档（HTML）
-\│      top_menu.php                      顶部菜单，几乎所有主要功能的链接（HTML）
-\│      view_goods.php                    浏览货物（HTML）
-\│
+&#124;  data.txt                              数据库数据，使用mysqldump自动生成
+&#124;  index.php                             主页
+&#124;  README.md                             说明文档，本文件
+&#124;
+├─database                               数据库相关文件夹
+&#124;  &#124;  connect_db.php                     连接数据库，封装了select，update，delete等函数
+&#124;  &#124;
+&#124;  └─init                                初始化数据库，create所有表，还有两个trigger
+&#124;          create_admin.php              create `admin` 关系表
+&#124;          create_buy.php                create `buy` 关系表
+&#124;          create_cart.php               create `cart` 关系表
+&#124;          create_comment.php            create `comment` 关系表
+&#124;          create_customer.php           create `customer` 关系表
+&#124;          create_good.php               create `good` 关系表
+&#124;          create_good_image.php         create `good_image`关系表
+&#124;          create_superadmin.php         create `superadmin` 关系表
+&#124;          freeze_trigger.php            create `freeze_trigger`触发器，
+&#124;                                          当用户被冻结、解冻时其发布的商品相应变化
+&#124;          pay_trigger.php               create `pay_trigger`触发器，购买商品后，从购买者购物车中
+&#124;                                          删除该商品，设置商品的状态为已出售
+&#124;																 
+├─div                                    浏览器显示的版块
+&#124;      search_menu.php                   搜索框和logo，显示XML文档（HTML）
+&#124;      top_menu.php                      顶部菜单，几乎所有主要功能的链接（HTML）
+&#124;      view_goods.php                    浏览货物（HTML）
+&#124;
 ├─files
-\│      show.xml                          动态生成的XML文档
-\│      show_XML.php                      动态生成XML文档的程序
-\|
-├─goods                                   管理商品
-\│      add_comment.php                   向数据库中`comments`表中添加评论
-\│      add_good.php                      向数据库中`goods`表中添加商品
-\│      add_in_cart.php                   向数据库中`carts`表中添加购物车关系
-\│      buy_management.php                买家管理已买商品页面，可以评论和退货（HTML）
-\│      cart_management.php               买家管理购物车，可以结账（HTML）
-\│      delete_cart.php                   删除数据库`cart`表中的数据，响应买家将商品移出购物车
-\│      delete_good.php                   删除数据库`goods`中的数据，响应卖家或管理员删除商品
-\│      edit_good.php                     更新数据库`goods`表中的数据，响应卖家修改商品信息
-\│      edit_good_info.php                卖家修改商品信息的页面（HTML）
-\│      freeze_good.php                   更新数据库中`goods`表中的状态信息，响应商品冻结、解冻
-\│      good_info.php                     展示单个商品的信息（HTML）
-\│      good_management.php               管理员管理所有的商品的页面，可进行删除，冻结操作（HTML）
-\│      new_comment.php                   添加评论页面（HTML）
-\│      new_good.php                      添加商品页面（HTML）
-\│      pay.php                           向数据库`buy`表中插入数据，响应购买操作
-\│      return_good.php                   更新数据库`good`中信息，响应退货操作				 
-\|       return_mangement.php             管理员查看退货信息的页面，响应退货判定（HTML）
-\│      sell_management.php               卖家管理发布的商品（HTML）
-\|
-\│
-└─usr                                     管理账号
-        add_customer.php                  向数据库中`customer`表中添加用户
-        admin_management.php              超级管理员查看管理员的页面（HTML）
-        apply_seller.php                  更新数据库中`customer`的状态，响应申请成为卖家的操作
-        change_pwd.php                    更新数据库中`customer`的密码，响应更改密码操作（超级管理员不可用）
-        check_seller.php                  管理员查看用户申请成为卖家的页面，可进行通过审核操作（HTML）
-        check_usr.php                     核对账号和密码，用于登录
-        delete_admin.php                  删除数据库中`admin`表中的数据，响应超级管理员删除管理员你的操作
-        delete_usr.php                    删除数据库中`customer`中的数据，响应管理员删除用户的操作
-        edit_customer.php                 更新数据库中`customer`的信息，响应用户修改个人信息
-        edit_info.php                     用户修改个人信息的页面（HTML）
-        freeze_usr.php                    更新数据库中`customer`的状态，响应管理员冻结用户账号的操作
-        new_admin.php                     超级管理员创建管理员的页面（HTML）
-        passwords.txt                     不同用户的账号和密码，仅用于方便个人记忆
-        personal_info.php                 展示个人信息的页面（HTML）
-        sign_in.php                       登录页面（HTML）
-        sign_out.php                      响应注销操作
-        sign_up.php                       注册页面（HTML）
-        update_seller.php                 更新数据库中`customer`的状态，响应管理员审核通过卖家申请
-        usr_management.php                管理员管理所有普通用户的页面，可进行封号删号（HTML）
+&#124;      show.xml                          动态生成的XML文档
+&#124;      show_XML.php                      动态生成XML文档的程序
+&#124;
+├─goods                                  管理商品
+&#124;      add_comment.php                   向数据库中`comments`表中添加评论
+&#124;      add_good.php                      向数据库中`goods`表中添加商品
+&#124;      add_in_cart.php                   向数据库中`carts`表中添加购物车关系
+&#124;      buy_management.php                买家管理已买商品页面，可以评论和退货（HTML）
+&#124;      cart_management.php               买家管理购物车，可以结账（HTML）
+&#124;      delete_cart.php                   删除数据库`cart`表中的数据，响应买家将商品移出购物车
+&#124;      delete_good.php                   删除数据库`goods`中的数据，响应卖家或管理员删除商品
+&#124;      edit_good.php                     更新数据库`goods`表中的数据，响应卖家修改商品信息
+&#124;      edit_good_info.php                卖家修改商品信息的页面（HTML）
+&#124;      freeze_good.php                   更新数据库中`goods`表中的状态信息，响应商品冻结、解冻
+&#124;      good_info.php                     展示单个商品的信息（HTML）
+&#124;      good_management.php               管理员管理所有的商品的页面，可进行删除，冻结操作（HTML）
+&#124;      new_comment.php                   添加评论页面（HTML）
+&#124;      new_good.php                      添加商品页面（HTML）
+&#124;      pay.php                           向数据库`buy`表中插入数据，响应购买操作
+&#124;      return_good.php                   更新数据库`good`中信息，响应退货操作				 
+&#124;       return_mangement.php             管理员查看退货信息的页面，响应退货判定（HTML）
+&#124;      sell_management.php               卖家管理发布的商品（HTML）
+&#124;
+&#124;
+└─usr                                    管理账号
+        add_customer.php                 向数据库中`customer`表中添加用户
+        admin_management.php             超级管理员查看管理员的页面（HTML）
+        apply_seller.php                 更新数据库中`customer`的状态，响应申请成为卖家的操作
+        change_pwd.php                   更新数据库中`customer`的密码，响应更改密码操作（超级管理员不可用）
+        check_seller.php                 管理员查看用户申请成为卖家的页面，可进行通过审核操作（HTML）
+        check_usr.php                    核对账号和密码，用于登录
+        delete_admin.php                 删除数据库中`admin`表中的数据，响应超级管理员删除管理员你的操作
+        delete_usr.php                   删除数据库中`customer`中的数据，响应管理员删除用户的操作
+        edit_customer.php                更新数据库中`customer`的信息，响应用户修改个人信息
+        edit_info.php                    用户修改个人信息的页面（HTML）
+        freeze_usr.php                   更新数据库中`customer`的状态，响应管理员冻结用户账号的操作
+        new_admin.php                    超级管理员创建管理员的页面（HTML）
+        passwords.txt                    不同用户的账号和密码，仅用于方便个人记忆
+        personal_info.php                展示个人信息的页面（HTML）
+        sign_in.php                      登录页面（HTML）
+        sign_out.php                     响应注销操作
+        sign_up.php                      注册页面（HTML）
+        update_seller.php                更新数据库中`customer`的状态，响应管理员审核通过卖家申请
+        usr_management.php               管理员管理所有普通用户的页面，可进行封号删号（HTML）
 
 上面标注了（HTML）的表示可以当成html文件，只不过我这里命名为.php
 
